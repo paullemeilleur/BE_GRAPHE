@@ -255,8 +255,11 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public double getTravelTime(double speed) {
-        // TODO:
-        return 0;
+        float resultat = 0;
+        for (int i = 0; i < this.arcs.size(); i++) {
+            resultat += this.arcs.get(i).getTravelTime(speed);
+        }
+        return resultat;
     }
 
     /**
