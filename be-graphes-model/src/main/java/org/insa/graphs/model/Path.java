@@ -201,31 +201,19 @@ public class Path {
      * 
      * @return true if the path is valid, false otherwise.
      * 
-     *         deprecated Need to be implemented.
+     * @deprecated Need to be implemented.
      */
     public boolean isValid() {
-
-        boolean arc = true;
-        int i = 0;
-
-        while ((i < this.arcs.size() - 1) && (arc)) {
-            if (this.arcs.get(i).getDestination() == this.arcs.get(i + 1).getOrigin()) {
-                arc = true;
-            } else {
-                arc = false;
-            }
-            i++;
-        }
-
         if (this.isEmpty()) {
             return true;
         } else if ((this.size()) == 1) {
             return true;
-        } else if ((this.arcs.get(0).getOrigin() == this.getOrigin()) && (arc)) {
-            return true;
-        } else {
-            return false;
         }
+        else if ((this.arcs.get(0).getOrigin()==this.getOrigin()) && ){
+            return true;
+        }
+
+        return false;
     }
 
     /**
@@ -236,12 +224,8 @@ public class Path {
      * @deprecated Need to be implemented.
      */
     public float getLength() {
-        float resultat = 0;
-        for (int i = 0; i < this.arcs.size(); i++) {
-            resultat += this.arcs.get(i).getLength();
-        }
-
-        return resultat;
+        // TODO:
+        return 0;
     }
 
     /**
