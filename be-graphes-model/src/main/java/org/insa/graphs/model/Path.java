@@ -97,7 +97,7 @@ public class Path {
      *                                  consecutive nodes in the list are not
      *                                  connected in the graph.
      * 
-     * @deprecated Need to be implemented.
+     * deprecated Need to be implemented.
      */
     public static Path createShortestPathFromNodes(Graph graph, List<Node> nodes) throws IllegalArgumentException {
         List<Arc> arcs = new ArrayList<Arc>();
@@ -143,7 +143,7 @@ public class Path {
                         le_plus_court = successeur;
                     }
                 }
-                arcs.add(le_plus_rapide);
+                arcs.add(le_plus_court);
             }
         }
 
