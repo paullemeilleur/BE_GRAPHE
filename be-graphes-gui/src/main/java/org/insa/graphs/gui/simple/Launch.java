@@ -12,9 +12,9 @@ import javax.swing.SwingUtilities;
 import org.insa.graphs.gui.drawing.Drawing;
 import org.insa.graphs.gui.drawing.components.BasicDrawing;
 import org.insa.graphs.model.Graph;
-import org.insa.graphs.model.GraphStatistics;
 import org.insa.graphs.model.Path;
 import org.insa.graphs.model.io.BinaryGraphReader;
+import org.insa.graphs.model.io.BinaryPathReader;
 import org.insa.graphs.model.io.GraphReader;
 import org.insa.graphs.model.io.PathReader;
 
@@ -55,21 +55,24 @@ public class Launch {
                 new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
 
         // TODO: Read the graph.
-        final graphStatistics stat = new graphStatistics (getBoundingBox, getOneWayRoadCount, getTwoWaysRoadCount,getMaximumSpeed, getMaximumLength);
-        final Graph graph = new Graph(getMapId(mapName), mapName, getNodes(mapName), stat);
+        final Graph graph = reader.read();
 
         // Create the drawing:
         final Drawing drawing = createDrawing();
 
         // TODO: Draw the graph on the drawing.
+        drawing.drawGraph(graph);
 
         // TODO: Create a PathReader.
-        final PathReader pathReader = null;
+        final PathReader pathReader = new BinaryPathReader(
+                new DataInputStream(new BufferedInputStream(new FileInputStream(pathName))));
 
         // TODO: Read the path.
-        final Path path = null;
+        final Path path = pathReader.readPath(graph);
 
         // TODO: Draw the path.
+        drawing.drawPath(path);
+
     }
 
 }
