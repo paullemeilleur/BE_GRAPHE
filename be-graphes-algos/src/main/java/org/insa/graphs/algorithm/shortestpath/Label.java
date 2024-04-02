@@ -43,6 +43,8 @@ public class Label implements Comparable<Label> {
             return 1;
         }
     }
-
+    public void marque1(){
+        this.marque=true;
+    }
     
 }
