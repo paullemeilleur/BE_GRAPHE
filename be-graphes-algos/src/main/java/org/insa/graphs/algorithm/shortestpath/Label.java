@@ -9,42 +9,45 @@ public class Label implements Comparable<Label> {
     private double cout_realise;
     private Arc pere;
 
-    public Label( Node sommet_courant,boolean marque,double cout_realise,Arc pere){
-        this.sommet_courant=sommet_courant;
-        this.marque=marque;
-        this.cout_realise=cout_realise;
-        this.pere=pere;
+    public Label(Node sommet_courant, boolean marque, double cout_realise, Arc pere) {
+        this.sommet_courant = sommet_courant;
+        this.marque = marque;
+        this.cout_realise = cout_realise;
+        this.pere = pere;
     }
 
-    public Node get_sommet_Courant(){
+    public Node get_sommet_Courant() {
         return this.sommet_courant;
 
     }
-    public Boolean get_marque(){
+
+    public Boolean get_marque() {
         return this.marque;
 
     }
-    public double getCost(){
+
+    public double getCost() {
         return this.cout_realise;
 
     }
-    public Arc get_pere(){
+
+    public Arc get_pere() {
         return this.pere;
 
     }
 
-
-    public int compareTo(Label l){
-        if (this.cout_realise < l.cout_realise){
+    public int compareTo(Label l) {
+        if (this.cout_realise < l.cout_realise) {
             return -1;
-        } else if (this.cout_realise == l.cout_realise){
+        } else if (this.cout_realise == l.cout_realise) {
             return 0;
-        }else {
+        } else {
             return 1;
         }
     }
-    public void marque1(){
-        this.marque=true;
+
+    public void marque1() {
+        this.marque = true;
     }
-    
+
 }
