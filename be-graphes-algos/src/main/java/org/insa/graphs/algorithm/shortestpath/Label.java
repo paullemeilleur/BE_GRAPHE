@@ -3,13 +3,13 @@ package org.insa.graphs.algorithm.shortestpath;
 import org.insa.graphs.model.Arc;
 import org.insa.graphs.model.Node;
 
-public class Label {
+public class Label implements Comparable<Label> {
     private Node sommet_courant;
     private boolean marque;
-    private int cout_realise;
+    private double cout_realise;
     private Arc pere;
 
-    public Label( Node sommet_courant,boolean marque,int cout_realise,Arc pere){
+    public Label( Node sommet_courant,boolean marque,double cout_realise,Arc pere){
         this.sommet_courant=sommet_courant;
         this.marque=marque;
         this.cout_realise=cout_realise;
@@ -24,7 +24,7 @@ public class Label {
         return this.marque;
 
     }
-    public int getCost(){
+    public double getCost(){
         return this.cout_realise;
 
     }
@@ -33,6 +33,16 @@ public class Label {
 
     }
 
+
+    public int compareTo(Label l){
+        if (this.cout_realise < l.cout_realise){
+            return -1;
+        } else if (this.cout_realise == l.cout_realise){
+            return 0;
+        }else {
+            return 1;
+        }
+    }
 
     
 }
