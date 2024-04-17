@@ -39,7 +39,13 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         while (!heapLabel.isEmpty() && !trouve) {
 
             Label x = heapLabel.deleteMin();
-            x.marque1();
+            x.marquer();
+
+            if (x.get_sommet_Courant() == data.getDestination()){
+                trouve = true;
+            }
+
+            
 
         }
 

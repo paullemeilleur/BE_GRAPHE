@@ -46,7 +46,7 @@ public class Label implements Comparable<Label> {
         }
     }
 
-    public void marque1() {
+    public void marquer() {
         this.marque = true;
     }
 
