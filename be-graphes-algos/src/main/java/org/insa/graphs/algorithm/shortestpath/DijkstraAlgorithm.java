@@ -18,69 +18,75 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
     @Override
     protected ShortestPathSolution doRun() {
 
+        // Retrieve the graph.
         final ShortestPathData data = getInputData();
-        ShortestPathSolution solution = null;
-        boolean trouve = false;
         Graph graph = data.getGraph();
 
-        Label[] labels = new Label[graph.size()];
-       // for (int i = 0; i < graph.size(); i++) {
-         //   labels[i] = new Label(graph.get(i), false, Double.POSITIVE_INFINITY, null);
-       // }
+        // Variable to help us for the algorithm
+        ShortestPathSolution solution = null;
+        boolean trouve = false;
 
+        // Our tab of label
+        Label[] labels = new Label[graph.size()];
+
+        // The heap
         BinaryHeap<Label> heapLabel = new BinaryHeap<Label>();
 
-
+        // Initialisation
         labels[0] = new Label(data.getOrigin(), true, 0, null);
         heapLabel.insert(labels[0]);
 
+        // Notify observers about the first event
         notifyOriginProcessed(data.getOrigin());
 
+        // Iterations
         while (!heapLabel.isEmpty() && !trouve) {
 
+            // Extracting the min
             Label x = heapLabel.deleteMin();
             x.marquer();
 
-            if (x.get_sommet_Courant() == data.getDestination()){
+            // If we have reached the destination, then we should know it for next part
+            if (x.get_sommet_Courant() == data.getDestination()) {
                 trouve = true;
             }
-            for (Arc Iterator: x.get_sommet_Courant().getSuccessors()){
-                    Label y=labels[Iterator.getDestination().getId()];
-                    if (!y.get_marque()){
-                        if(y.getCost()> x.getCost()+data.getCost(Iterator)){
-                        y.maj_cost(x.getCost()+data.getCost(Iterator));
+
+            // Iterating over all successors
+            for (Arc Iterator : x.get_sommet_Courant().getSuccessors()) {
+                Label y = labels[Iterator.getDestination().getId()];
+
+                // If it has not been marked yet
+                if (!y.get_marque()) {
+                    // If the cost is inferior than the previous one, we change it
+                    if (y.getCost() > x.getCost() + data.getCost(Iterator)) {
+                        y.maj_cost(x.getCost() + data.getCost(Iterator));
                         heapLabel.insert(y);
                         y.maj_pere(Iterator);
-                } 
-
-            
-
+                    }
+                }
+            }
         }
-    }
-}
-        
-        if (!trouve || labels[data.getDestination().getId()] == null || data.getDestination().getId()==data.getOrigin().getId())   {
-                solution = new ShortestPathSolution(data,AbstractSolution.Status.INFEASIBLE); 
 
-        }  
-        else{
-            ArrayList<Arc> list_arcs = new ArrayList<>() ;
+        // If no solution is find
+        if (!trouve || labels[data.getDestination().getId()] == null
+                || data.getDestination().getId() == data.getOrigin().getId()) {
+            solution = new ShortestPathSolution(data, AbstractSolution.Status.INFEASIBLE);
+        } else {
+            ArrayList<Arc> list_arcs = new ArrayList<>();
             Arc arc_pere = labels[data.getDestination().getId()].get_pere();
-            while (arc_pere != null){
-                list_arcs.add(arc_pere);
-                arc_pere = labels[arc_pere.getOrigin().getId()].get_pere(); 
 
-            }  
-            Collections.reverse (list_arcs) ;
-            solution = new ShortestPathSolution(data,AbstractSolution.Status.OPTIMAL, new Path(graph,list_arcs));
-        } 
+            // Collecting the solution
+            while (arc_pere != null) {
+                list_arcs.add(arc_pere);
+                arc_pere = labels[arc_pere.getOrigin().getId()].get_pere();
+            }
+
+            // Putting the solution in the right order
+            Collections.reverse(list_arcs);
+
+            solution = new ShortestPathSolution(data, AbstractSolution.Status.OPTIMAL, new Path(graph, list_arcs));
+        }
 
         return solution;
     }
 }
-
-
-
-
-
-

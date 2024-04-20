@@ -50,12 +50,12 @@ public class Label implements Comparable<Label> {
         this.marque = true;
     }
 
-    public void maj_cost(double i){
-        this.cout_realise=i;
-    } 
- 
-    public void maj_pere(Arc a){
-        this.pere=a;
-    } 
+    public void maj_cost(double i) {
+        this.cout_realise = i;
+    }
+
+    public void maj_pere(Arc a) {
+        this.pere = a;
+    }
 
 }
