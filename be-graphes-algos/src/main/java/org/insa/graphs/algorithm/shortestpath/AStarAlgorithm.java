@@ -17,7 +17,7 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
     }
 
     @Override
-    protected Label create_Label (Node sommet_courant, boolean marque, double cout_realise, Arc pere){
+    protected LabelStar create_Label (Node sommet_courant, boolean marque, double cout_realise, Arc pere){
         return new LabelStar(sommet_courant, marque, cout_realise, pere, getInputData().getDestination());
     }
 }
