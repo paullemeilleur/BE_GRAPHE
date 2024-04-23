@@ -46,13 +46,11 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
             // Extracting the min
             Label x = heapLabel.deleteMin();
-            System.out.println(x.get_sommet_Courant().getId() + " " + x.get_marque());
             x.marquer();
 
             // If we have reached the destination, then we should know it for next part
             if (x.get_sommet_Courant() == data.getDestination()) {
                 trouve = true;
-                System.out.println("Trouvé");
             }
 
             // Iterating over all successors
