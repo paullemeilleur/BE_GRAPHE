@@ -9,12 +9,21 @@ import org.insa.graphs.algorithm.utils.BinaryHeap;
 import org.insa.graphs.algorithm.utils.ElementNotFoundException;
 import org.insa.graphs.model.Arc;
 import org.insa.graphs.model.Graph;
+import org.insa.graphs.model.Node;
 import org.insa.graphs.model.Path;
 
 public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
     public DijkstraAlgorithm(ShortestPathData data) {
         super(data);
+    }
+
+    protected Label[] create_tab_label (int size){
+        return new Label[size];
+    }
+
+    protected Label create_Label (Node sommet_courant, boolean marque, double cout_realise, Arc pere){
+        return new Label(sommet_courant, marque, cout_realise, pere);
     }
 
     @Override
@@ -29,13 +38,13 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         boolean trouve = false;
 
         // Our tab of label
-        Label[] labels = new Label[graph.size()];
+        Label[] labels = create_tab_label(graph.size());
 
         // The heap
         BinaryHeap<Label> heapLabel = new BinaryHeap<Label>();
 
         // Initialisation
-        labels[data.getOrigin().getId()] = new Label(data.getOrigin(), true, 0, null);
+        labels[data.getOrigin().getId()] = create_Label(data.getOrigin(), true, 0, null);
         heapLabel.insert(labels[data.getOrigin().getId()]);
 
         // Notify observers about the first event
@@ -47,7 +56,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             
             // Extracting the min
             Label x = heapLabel.deleteMin();
-            System.out.println(x.get_sommet_Courant().getId() + " " + x.getCost());
             x.marquer();
             notifyNodeMarked(x.get_sommet_Courant());
 
@@ -67,15 +75,15 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
                 // If it has not been marked yet
                 if (labels[a.getDestination().getId()] == null) {
-                    labels[a.getDestination().getId()] = new Label(a.getDestination(), false, Double.MAX_VALUE, null);
+                    labels[a.getDestination().getId()] = create_Label(a.getDestination(), false, Double.MAX_VALUE, null);
                     
                 }
 
                 Label y = labels[a.getDestination().getId()];
 
                 // If the cost is inferior than the previous one, we change it
-                if (y.getCost() > x.getCost() + data.getCost(a)) {
-                    y.maj_cost(x.getCost() + data.getCost(a));
+                if (y.get_total_Cost() > x.get_total_Cost() + data.getCost(a)) {
+                    y.maj_cost(x.get_total_Cost() + data.getCost(a));
                     y.maj_pere(a);
                     try{
                         heapLabel.remove(y);

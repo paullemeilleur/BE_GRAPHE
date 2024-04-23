@@ -26,7 +26,7 @@ public class Label implements Comparable<Label> {
 
     }
 
-    public double getCost() {
+    public double get_Cost() {
         return this.cout_realise;
 
     }
@@ -45,6 +45,13 @@ public class Label implements Comparable<Label> {
             return 1;
         }
     }
+
+    public double get_total_Cost() {
+        return this.cout_realise;
+
+    }
+
+
 
     public void marquer() {
         this.marque = true;
