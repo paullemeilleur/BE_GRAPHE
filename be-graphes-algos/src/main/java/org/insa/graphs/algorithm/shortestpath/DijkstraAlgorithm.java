@@ -47,10 +47,12 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             // Extracting the min
             Label x = heapLabel.deleteMin();
             x.marquer();
+            notifyNodeMarked(x.get_sommet_Courant());
 
             // If we have reached the destination, then we should know it for next part
             if (x.get_sommet_Courant() == data.getDestination()) {
                 trouve = true;
+                notifyDestinationReached(x.get_sommet_Courant());
             }
 
             // Iterating over all successors
@@ -77,6 +79,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                         heapLabel.remove(y);
                         heapLabel.insert(y);
                     } catch (ElementNotFoundException e){
+                        notifyNodeReached(y.get_sommet_Courant());
                         heapLabel.insert(y);
                     }
                     
