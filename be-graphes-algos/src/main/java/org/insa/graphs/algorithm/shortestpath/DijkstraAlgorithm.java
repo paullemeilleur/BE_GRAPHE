@@ -56,6 +56,10 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             // Iterating over all successors
             for (Arc a : x.get_sommet_Courant().getSuccessors()) {
                 
+                if (!data.isAllowed(a)){
+                    continue;
+                }
+
 
                 // If it has not been marked yet
                 if (labels[a.getDestination().getId()] == null) {
@@ -80,7 +84,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
             }
         }
 
-        System.out.println(Arrays.toString(labels));
+    
 
         // If no solution is find
         if (!trouve || labels[data.getDestination().getId()] == null) {
