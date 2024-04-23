@@ -1,10 +1,12 @@
 package org.insa.graphs.algorithm.shortestpath;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 
 import org.insa.graphs.algorithm.AbstractSolution;
 import org.insa.graphs.algorithm.utils.BinaryHeap;
+import org.insa.graphs.algorithm.utils.ElementNotFoundException;
 import org.insa.graphs.model.Arc;
 import org.insa.graphs.model.Graph;
 import org.insa.graphs.model.Path;
@@ -33,8 +35,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         BinaryHeap<Label> heapLabel = new BinaryHeap<Label>();
 
         // Initialisation
-        labels[0] = new Label(data.getOrigin(), true, 0, null);
-        heapLabel.insert(labels[0]);
+        labels[data.getOrigin().getId()] = new Label(data.getOrigin(), true, 0, null);
+        heapLabel.insert(labels[data.getOrigin().getId()]);
 
         // Notify observers about the first event
         notifyOriginProcessed(data.getOrigin());
@@ -44,32 +46,46 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
             // Extracting the min
             Label x = heapLabel.deleteMin();
+            System.out.println(x.get_sommet_Courant().getId() + " " + x.get_marque());
             x.marquer();
 
             // If we have reached the destination, then we should know it for next part
             if (x.get_sommet_Courant() == data.getDestination()) {
                 trouve = true;
+                System.out.println("Trouvé");
             }
 
             // Iterating over all successors
-            for (Arc Iterator : x.get_sommet_Courant().getSuccessors()) {
-                Label y = labels[Iterator.getDestination().getId()];
+            for (Arc a : x.get_sommet_Courant().getSuccessors()) {
+                
 
                 // If it has not been marked yet
-                if (!y.get_marque()) {
-                    // If the cost is inferior than the previous one, we change it
-                    if (y.getCost() > x.getCost() + data.getCost(Iterator)) {
-                        y.maj_cost(x.getCost() + data.getCost(Iterator));
+                if (labels[a.getDestination().getId()] == null) {
+                    labels[a.getDestination().getId()] = new Label(a.getDestination(), false, Double.MAX_VALUE, null);
+                    
+                }
+
+                Label y = labels[a.getDestination().getId()];
+
+                // If the cost is inferior than the previous one, we change it
+                if (y.getCost() > x.getCost() + data.getCost(a)) {
+                    y.maj_cost(x.getCost() + data.getCost(a));
+                    y.maj_pere(a);
+                    try{
+                        heapLabel.remove(y);
                         heapLabel.insert(y);
-                        y.maj_pere(Iterator);
+                    } catch (ElementNotFoundException e){
+                        heapLabel.insert(y);
                     }
+                    
                 }
             }
         }
 
+        System.out.println(Arrays.toString(labels));
+
         // If no solution is find
-        if (!trouve || labels[data.getDestination().getId()] == null
-                || data.getDestination().getId() == data.getOrigin().getId()) {
+        if (!trouve || labels[data.getDestination().getId()] == null) {
             solution = new ShortestPathSolution(data, AbstractSolution.Status.INFEASIBLE);
         } else {
             ArrayList<Arc> list_arcs = new ArrayList<>();
