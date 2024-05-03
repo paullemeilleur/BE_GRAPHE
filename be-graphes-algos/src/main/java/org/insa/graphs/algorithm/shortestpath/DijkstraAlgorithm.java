@@ -82,8 +82,8 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 Label y = labels[a.getDestination().getId()];
 
                 // If the cost is inferior than the previous one, we change it
-                if (y.get_total_Cost() > x.get_total_Cost() + data.getCost(a)) {
-                    y.maj_cost(x.get_total_Cost() + data.getCost(a));
+                if (y.get_Cost() > x.get_Cost() + data.getCost(a)) {
+                    y.maj_cost(x.get_Cost() + data.getCost(a));
                     y.maj_pere(a);
                     try{
                         heapLabel.remove(y);
