@@ -71,7 +71,7 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 if (!data.isAllowed(a)){
                     continue;
                 }
-
+                // boolean 
 
                 // If it has not been marked yet
                 if (labels[a.getDestination().getId()] == null) {

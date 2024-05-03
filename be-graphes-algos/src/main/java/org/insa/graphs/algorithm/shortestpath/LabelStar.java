@@ -7,9 +7,9 @@ public class LabelStar extends Label {
 
     private double cout_distant;
 
-    public LabelStar(Node sommet_courant, boolean marque, double cout_realise, Arc pere, Node destination) {
+    public LabelStar(Node sommet_courant, boolean marque, double cout_realise, Arc pere, double cout_distant) {
         super(sommet_courant, marque, cout_realise, pere);
-        this.cout_distant = sommet_courant.getPoint().distanceTo(destination.getPoint());
+        this.cout_distant = cout_distant; 
     }
 
 

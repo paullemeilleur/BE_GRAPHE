@@ -46,8 +46,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
     private void arraySet(int index, E value) {
         if (index == this.array.size()) {
             this.array.add(value);
-        }
-        else {
+        } else {
             this.array.set(index, value);
         }
     }
@@ -106,8 +105,7 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
                     this.arraySet(ileft, current);
                     this.percolateDown(ileft);
                 }
-            }
-            else {
+            } else {
                 // Right is smaller
                 if (right.compareTo(current) < 0) {
                     this.arraySet(index, right);
@@ -140,22 +138,27 @@ public class BinaryHeap<E extends Comparable<E>> implements PriorityQueue<E> {
         boolean trouve = false;
 
         if (this.size() == 0) {
-            throw (new ElementNotFoundException ("Tas vide"));
-        } 
-        
+            throw (new ElementNotFoundException(x));
+        }
+
         int i = 0;
-        while ((i < this.size()) && (!trouve)){
-            if (this.array.get(i) == x){
+        while ((i < this.size()) && (!trouve)) {
+            if (this.array.get(i) == x) {
                 trouve = true;
-                this.arraySet(i, this.array.get(--this.currentSize));
-                this.percolateDown(i);
-                percolateUp(i);
+                if (i == this.size() - 1) {
+                    --this.currentSize;
+                } else {
+                    this.arraySet(i, this.array.get(--this.currentSize));
+                    this.percolateDown(i);
+                    percolateUp(i);
+                }
+
             }
             i++;
         }
 
-        if (!trouve){
-            throw (new ElementNotFoundException("Element pas trouvé"));
+        if (!trouve) {
+            throw (new ElementNotFoundException(x));
         }
 
     }

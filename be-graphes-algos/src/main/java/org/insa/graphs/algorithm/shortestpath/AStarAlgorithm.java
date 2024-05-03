@@ -1,5 +1,6 @@
 package org.insa.graphs.algorithm.shortestpath;
 
+import org.insa.graphs.algorithm.AbstractInputData.Mode;
 import org.insa.graphs.model.Arc;
 import org.insa.graphs.model.Graph;
 import org.insa.graphs.model.Node;
@@ -18,6 +19,10 @@ public class AStarAlgorithm extends DijkstraAlgorithm {
 
     @Override
     protected LabelStar create_Label (Node sommet_courant, boolean marque, double cout_realise, Arc pere){
-        return new LabelStar(sommet_courant, marque, cout_realise, pere, getInputData().getDestination());
+        double estimation = sommet_courant.getPoint().distanceTo(getInputData().getDestination().getPoint());
+        if (getInputData().getMode() == Mode.TIME){
+            estimation = estimation/getInputData().getGraph().getGraphInformation().getMaximumSpeed();
+        }
+        return new LabelStar(sommet_courant, marque, cout_realise, pere, estimation);
     }
 }

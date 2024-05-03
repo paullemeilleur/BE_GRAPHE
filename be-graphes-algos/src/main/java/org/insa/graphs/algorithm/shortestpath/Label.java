@@ -37,6 +37,7 @@ public class Label implements Comparable<Label> {
     }
 
     public int compareTo(Label l) {
+        // return Double.compare(this.get_total_Cost(), l.get_total_Cost());
         if (this.get_total_Cost() < l.get_total_Cost()) {
             return -1;
         } else if (this.get_total_Cost() == l.get_total_Cost()) {
