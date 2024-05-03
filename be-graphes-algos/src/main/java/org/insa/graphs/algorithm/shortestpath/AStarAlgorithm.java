@@ -6,6 +6,7 @@ import org.insa.graphs.model.Graph;
 import org.insa.graphs.model.Node;
 import org.insa.graphs.model.Path;
 
+
 public class AStarAlgorithm extends DijkstraAlgorithm {
 
     public AStarAlgorithm(ShortestPathData data) {
