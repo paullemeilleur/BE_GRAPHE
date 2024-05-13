@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 
 import org.insa.graphs.algorithm.ArcInspector;
 import org.insa.graphs.algorithm.ArcInspectorFactory;
+import org.insa.graphs.algorithm.shortestpath.AStarAlgorithm;
 import org.insa.graphs.algorithm.shortestpath.BellmanFordAlgorithm;
 import org.insa.graphs.algorithm.shortestpath.DijkstraAlgorithm;
 import org.insa.graphs.algorithm.shortestpath.ShortestPathData;
@@ -18,29 +19,25 @@ import org.insa.graphs.model.io.GraphReader;
 import org.junit.Test;
 
 public class AlgoTest {
-    @Test
-    public void testScenario(String mapName, int typeEvaluation, int origine, int destination) throws Exception {
-        // public void testScenario(String mapName, int typeEvaluation, Node origine,
-        // Node destination) throws Exception {
 
-        // Create a graph reader.
+    public void testScenario(String mapName, int typeEvaluation, int origine, int destination, boolean Dijkstra)
+            throws Exception {
+
         GraphReader reader = new BinaryGraphReader(
                 new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
 
-        // Read the graph.
+        BellmanFordAlgorithm B;
+        AStarAlgorithm A;
+        DijkstraAlgorithm D;
+        ShortestPathSolution Attendu;
+        ShortestPathSolution Obtenu;
+
         Graph graph = reader.read();
 
         if (typeEvaluation != 0 && typeEvaluation != 1) {
             System.out.println("Argument invalide");
         } else {
-            if (origine < 0 || destination < 0 || origine >= (graph.size() - 1) || destination >= (graph.size() - 1)) { // On
-                                                                                                                        // est
-                                                                                                                        // hors
-                                                                                                                        // du
-                                                                                                                        // graphe.
-                                                                                                                        // /
-                                                                                                                        // Sommets
-                                                                                                                        // inexistants
+            if (origine < 0 || destination < 0 || origine >= (graph.size() - 1) || destination >= (graph.size() - 1)) {
                 System.out.println("ERREUR : Paramètres invalides ");
 
             } else {
@@ -54,41 +51,45 @@ public class AlgoTest {
                     arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(0);
                 }
 
-                // System.out.println("Chemin de la carte : "+mapName);
                 System.out.println("Origine : " + origine);
                 System.out.println("Destination : " + destination);
 
                 if (origine == destination) {
                     System.out.println("Origine et Destination identiques");
-                    System.out.println("Cout solution: 0");
+                    System.out.println("Cout Solution: 0");
 
                 } else {
                     ShortestPathData data = new ShortestPathData(graph, graph.get(origine), graph.get(destination),
                             arcInspectorDijkstra);
+                    if (Dijkstra) {
+                        B = new BellmanFordAlgorithm(data);
+                        D = new DijkstraAlgorithm(data);
 
-                    BellmanFordAlgorithm B = new BellmanFordAlgorithm(data);
-                    DijkstraAlgorithm D = new DijkstraAlgorithm(data);
+                        Obtenu = D.run();
+                        Attendu = B.run();
+                    } else {
+                        B = new BellmanFordAlgorithm(data);
+                        A = new AStarAlgorithm(data);
 
-                    // Recuperation des solutions de Bellman et Dijkstra pour comparer
-                    ShortestPathSolution solution = D.run();
-                    ShortestPathSolution expected = B.run();
-
-                    if (solution.getPath() == null) {
-                        assertEquals(expected.getPath(), solution.getPath());
+                        Obtenu = A.run();
+                        Attendu = B.run();
+                    }
+                    if (Obtenu.getPath() == null) {
+                        assertEquals(Attendu.getPath(), Obtenu.getPath());
                         System.out.println("PAS DE SOLUTION");
                         System.out.println("(infini) ");
                     }
-                    // Un plus court chemin trouve
+
                     else {
                         double costSolution;
                         double costExpected;
                         if (typeEvaluation == 0) { // Temps
-                            // Calcul du cout de la solution
-                            costSolution = solution.getPath().getMinimumTravelTime();
-                            costExpected = expected.getPath().getMinimumTravelTime();
+
+                            costSolution = Obtenu.getPath().getMinimumTravelTime();
+                            costExpected = Attendu.getPath().getMinimumTravelTime();
                         } else {
-                            costSolution = solution.getPath().getLength();
-                            costExpected = expected.getPath().getLength();
+                            costSolution = Obtenu.getPath().getLength();
+                            costExpected = Attendu.getPath().getLength();
                         }
                         assertEquals(costExpected, costSolution, 0.001);
                         System.out.println("Cout solution: " + costSolution);
@@ -99,4 +100,105 @@ public class AlgoTest {
         System.out.println();
         System.out.println();
     }
+
+    @Test
+    public void testScenarioSansBellman(String mapName, int origine, int destination, boolean Dijkstra)
+            throws Exception {
+
+        double fastesttimecost = Double.POSITIVE_INFINITY;
+        double fastestdistancecost = Double.POSITIVE_INFINITY;
+        double shortesttimecost = Double.POSITIVE_INFINITY;
+        double shortestdistancecost = Double.POSITIVE_INFINITY;
+
+        AStarAlgorithm A;
+        DijkstraAlgorithm D;
+        ShortestPathSolution Obtenu;
+
+        // Create a graph reader.
+        GraphReader reader = new BinaryGraphReader(
+                new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
+
+        // Read the graph.
+        Graph graph = reader.read();
+
+        if (origine < 0 || destination < 0 || origine >= (graph.size() - 1) || destination >= (graph.size() - 1)) {
+            System.out.println("erreur de paramètres");
+
+        } else {
+            System.out.println("Origine : " + origine);
+            System.out.println("Destination : " + destination);
+
+            if (origine == destination) {
+                System.out.println("Origine et Destination identiques");
+                System.out.println("Tous les couts sont à 0.");
+
+            } else {
+
+                /** Recherche du chemin le plus rapide **/
+                ArcInspector arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(2);
+
+                ShortestPathData data = new ShortestPathData(graph, graph.get(origine), graph.get(destination),
+                        arcInspectorDijkstra);
+
+                if (Dijkstra) {
+                    D = new AStarAlgorithm(data);
+                    Obtenu = D.run();
+                } else {
+                    A = new AStarAlgorithm(data);
+                    Obtenu = A.run();
+                }
+
+                if (Obtenu.getPath() == null) {
+                    System.out.println("Pas de solution en temps");
+                } else {
+                    fastesttimecost = Obtenu.getPath().getMinimumTravelTime();
+                    fastestdistancecost = Obtenu.getPath().getLength();
+                }
+
+                /** Recherche du chemin le plus court **/
+
+                arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(0);
+                data = new ShortestPathData(graph, graph.get(origine), graph.get(destination), arcInspectorDijkstra);
+
+                if (Dijkstra) {
+                    D = new AStarAlgorithm(data);
+                    Obtenu = D.run();
+                } else {
+                    A = new AStarAlgorithm(data);
+                    Obtenu = A.run();
+                }
+
+                /* Pas de chemin trouve */
+                if (Obtenu.getPath() == null) {
+                    System.out.println("pas de solution en distance");
+                }
+                /* Un plus court chemin trouve */
+                else {
+                    /* Calcul du cout de la solution (en temps et en distance) */
+                    shortesttimecost = Obtenu.getPath().getMinimumTravelTime();
+                    shortestdistancecost = Obtenu.getPath().getLength();
+                }
+
+                /*
+                 * Verifie que le temps du chemin le plus rapide est inferieur au temps du
+                 * chemin le plus court
+                 */
+                assertTrue(fastesttimecost <= shortesttimecost);
+                System.out.println("Cout en temps du chemin le plus rapide : " + fastesttimecost);
+                System.out.println("Cout en temps du chemin le plus court  : " + shortesttimecost);
+
+                /*
+                 * Et verifie que la distance du chemin le plus rapide est superieur a la
+                 * distance du chemin le plus court
+                 */
+                assertTrue(fastestdistancecost >= shortestdistancecost);
+                System.out.println("Cout en distance du chemin le plus rapide : " + fastestdistancecost);
+                System.out.println("Cout en distance du chemin le plus court  : " + shortestdistancecost);
+
+            }
+        }
+        System.out.println();
+        System.out.println();
+    }
+
 }

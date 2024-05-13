@@ -18,11 +18,11 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         super(data);
     }
 
-    protected Label[] create_tab_label (int size){
+    protected Label[] create_tab_label(int size) {
         return new Label[size];
     }
 
-    protected Label create_Label (Node sommet_courant, boolean marque, double cout_realise, Arc pere){
+    protected Label create_Label(Node sommet_courant, boolean marque, double cout_realise, Arc pere) {
         return new Label(sommet_courant, marque, cout_realise, pere);
     }
 
@@ -53,7 +53,6 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
         // Iterations
         while (!heapLabel.isEmpty() && !trouve) {
 
-            
             // Extracting the min
             Label x = heapLabel.deleteMin();
             x.marquer();
@@ -67,16 +66,17 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
 
             // Iterating over all successors
             for (Arc a : x.get_sommet_Courant().getSuccessors()) {
-                
-                if (!data.isAllowed(a)){
+
+                if (!data.isAllowed(a)) {
                     continue;
                 }
-                // boolean 
+                // boolean
 
                 // If it has not been marked yet
                 if (labels[a.getDestination().getId()] == null) {
-                    labels[a.getDestination().getId()] = create_Label(a.getDestination(), false, Double.MAX_VALUE, null);
-                    
+                    labels[a.getDestination().getId()] = create_Label(a.getDestination(), false, Double.MAX_VALUE,
+                            null);
+
                 }
 
                 Label y = labels[a.getDestination().getId()];
@@ -85,19 +85,17 @@ public class DijkstraAlgorithm extends ShortestPathAlgorithm {
                 if (y.get_Cost() > x.get_Cost() + data.getCost(a)) {
                     y.maj_cost(x.get_Cost() + data.getCost(a));
                     y.maj_pere(a);
-                    try{
+                    try {
                         heapLabel.remove(y);
                         heapLabel.insert(y);
-                    } catch (ElementNotFoundException e){
+                    } catch (ElementNotFoundException e) {
                         notifyNodeReached(y.get_sommet_Courant());
                         heapLabel.insert(y);
                     }
-                    
+
                 }
             }
         }
-
-    
 
         // If no solution is find
         if (!trouve || labels[data.getDestination().getId()] == null) {
