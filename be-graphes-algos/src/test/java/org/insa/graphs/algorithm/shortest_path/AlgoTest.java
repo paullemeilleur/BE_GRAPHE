@@ -20,8 +20,9 @@ import org.junit.Test;
 
 public class AlgoTest {
 
-    public void testScenario(String mapName, int typeEvaluation, int origine, int destination, boolean Dijkstra)
-            throws Exception {
+    public void testScenario(String mapName, int typeEvaluation, int origine, int destination, boolean Dijkstra,
+            int vehicles)
+            throws Exception { // si vehicles = 0 --> cars, si = 1 --> bicycle
 
         GraphReader reader = new BinaryGraphReader(
                 new DataInputStream(new BufferedInputStream(new FileInputStream(mapName))));
@@ -45,10 +46,26 @@ public class AlgoTest {
 
                 if (typeEvaluation == 0) { // Temps
                     System.out.println("Mode : Temps");
-                    arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(2);
+                    if (vehicles == 0) {
+                        arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(2);
+                    } else if (vehicles == 1) {
+                        arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(3);
+                    } else {
+                        System.err.println("Par défaut, tous les arcs sont autorisés\n");
+                        arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(0);
+                    }
+
                 } else {
                     System.out.println("Mode : Distance");
-                    arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(0);
+                    if (vehicles == 0) {
+                        arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(1);
+                    } else if (vehicles == 1) {
+                        arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(4);
+                    } else {
+                        System.err.println("Par défaut, tous les arcs sont autorisés\n");
+                        arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(0);
+                    }
+
                 }
 
                 System.out.println("Origine : " + origine);
@@ -102,7 +119,7 @@ public class AlgoTest {
     }
 
     @Test
-    public void testScenarioSansBellman(String mapName, int origine, int destination, boolean Dijkstra)
+    public void testScenarioSansBellman(String mapName, int origine, int destination, boolean Dijkstra, int vehicles)
             throws Exception {
 
         double fastesttimecost = Double.POSITIVE_INFINITY;
@@ -135,7 +152,15 @@ public class AlgoTest {
             } else {
 
                 /** Recherche du chemin le plus rapide **/
-                ArcInspector arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(2);
+                ArcInspector arcInspectorDijkstra;
+                if (vehicles == 0) {
+                    arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(2);
+                } else if (vehicles == 1) {
+                    arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(3);
+                } else {
+                    System.err.println("Par défaut, tous les arcs sont autorisés\n");
+                    arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(0);
+                }
 
                 ShortestPathData data = new ShortestPathData(graph, graph.get(origine), graph.get(destination),
                         arcInspectorDijkstra);
@@ -156,8 +181,17 @@ public class AlgoTest {
                 }
 
                 /** Recherche du chemin le plus court **/
+                
+                if (vehicles == 0) {
+                    arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(1);
+                } else if (vehicles == 1) {
+                    arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(4);
+                } else {
+                    System.err.println("Par défaut, tous les arcs sont autorisés\n");
+                    arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(0);
+                }
 
-                arcInspectorDijkstra = ArcInspectorFactory.getAllFilters().get(0);
+                
                 data = new ShortestPathData(graph, graph.get(origine), graph.get(destination), arcInspectorDijkstra);
 
                 if (Dijkstra) {

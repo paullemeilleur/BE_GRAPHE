@@ -18,9 +18,9 @@ public class DijkstraTestSansBellman {
 
         try {
             System.out.println("Cas d'un chemin simple");
-            origine = 4965;
-            destination = 4943;
-            test.testScenarioSansBellman(mapName, origine, destination, true);
+            origine = 4921;
+            destination = 38978;
+            test.testScenarioSansBellman(mapName, origine, destination, true,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenarioSansBellman");
         }
@@ -29,7 +29,7 @@ public class DijkstraTestSansBellman {
             System.out.println("Cas d'un chemin impossible");
             origine = 4965;
             destination = 183889;
-            test.testScenarioSansBellman(mapName, origine, destination, true);
+            test.testScenarioSansBellman(mapName, origine, destination, true,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenarioSansBellman");
         }
@@ -38,7 +38,7 @@ public class DijkstraTestSansBellman {
             System.out.println("Cas origine = Destination");
             origine = 4965;
             destination = 4965;
-            test.testScenarioSansBellman(mapName, origine, destination, true);
+            test.testScenarioSansBellman(mapName, origine, destination, true,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenarioSansBellman");
         }
@@ -47,7 +47,7 @@ public class DijkstraTestSansBellman {
             System.out.println("Cas d'un chemin très long");
             origine = 60478;
             destination = 35535;
-            test.testScenarioSansBellman(mapName, origine, destination, true);
+            test.testScenarioSansBellman(mapName, origine, destination, true,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenarioSansBellman");
         }
@@ -56,7 +56,7 @@ public class DijkstraTestSansBellman {
             System.out.println("Cas d'un points inexistants");
             origine = -1;
             destination = -2;
-            test.testScenarioSansBellman(mapName, origine, destination, true);
+            test.testScenarioSansBellman(mapName, origine, destination, true,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenarioSansBellman");
         }
@@ -80,7 +80,7 @@ public class DijkstraTestSansBellman {
             System.out.println("Cas d'un chemin simple");
             origine = 287;
             destination = 282;
-            test.testScenarioSansBellman(mapName, origine, destination, true);
+            test.testScenarioSansBellman(mapName, origine, destination, true,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenarioSansBellman");
         }
@@ -89,7 +89,7 @@ public class DijkstraTestSansBellman {
             System.out.println("Cas d'un chemin impossible");
             origine = 1283;
             destination = 735;
-            test.testScenarioSansBellman(mapName, origine, destination, true);
+            test.testScenarioSansBellman(mapName, origine, destination, true,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenarioSansBellman");
         }
@@ -98,7 +98,7 @@ public class DijkstraTestSansBellman {
             System.out.println("Cas origine = Destination");
             origine = 396;
             destination = 396;
-            test.testScenarioSansBellman(mapName, origine, destination, true);
+            test.testScenarioSansBellman(mapName, origine, destination, true,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenarioSansBellman");
         }
@@ -107,7 +107,7 @@ public class DijkstraTestSansBellman {
             System.out.println("Cas d'un chemin très long");
             origine = 107;
             destination = 60;
-            test.testScenarioSansBellman(mapName, origine, destination, true);
+            test.testScenarioSansBellman(mapName, origine, destination, true,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenarioSansBellman");
         }
@@ -116,7 +116,7 @@ public class DijkstraTestSansBellman {
             System.out.println("Cas d'un points inexistants");
             origine = -1;
             destination = -2;
-            test.testScenarioSansBellman(mapName, origine, destination, true);
+            test.testScenarioSansBellman(mapName, origine, destination, true,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenarioSansBellman");
         }
@@ -140,7 +140,7 @@ public class DijkstraTestSansBellman {
             System.out.println("Cas d'un chemin long");
             origine = 244253;
             destination = 85284;
-            test.testScenarioSansBellman(mapName, origine, destination, true);
+            test.testScenarioSansBellman(mapName, origine, destination, true,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenarioSansBellman");
         }
@@ -149,7 +149,7 @@ public class DijkstraTestSansBellman {
             System.out.println("Cas d'un chemin simple");
             origine = 200457;
             destination = 17462;
-            test.testScenarioSansBellman(mapName, origine, destination, true);
+            test.testScenarioSansBellman(mapName, origine, destination, true,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenarioSansBellman");
         }
@@ -158,7 +158,7 @@ public class DijkstraTestSansBellman {
             System.out.println("Cas origine = Destination");
             origine = 17462;
             destination = 17462;
-            test.testScenarioSansBellman(mapName, origine, destination, true);
+            test.testScenarioSansBellman(mapName, origine, destination, true,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenarioSansBellman");
         }
@@ -167,7 +167,7 @@ public class DijkstraTestSansBellman {
             System.out.println("Cas d'un points inexistants");
             origine = -1;
             destination = -2;
-            test.testScenarioSansBellman(mapName, origine, destination, true);
+            test.testScenarioSansBellman(mapName, origine, destination, true,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenarioSansBellman");
         }

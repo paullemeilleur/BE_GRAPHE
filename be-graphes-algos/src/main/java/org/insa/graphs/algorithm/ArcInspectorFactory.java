@@ -143,6 +143,41 @@ public class ArcInspectorFactory {
         }
     } ;
 
+    static ArcInspector forBicyclesL = new ArcInspector() {
+        
+        //static final int maxPedestrianSpeed = 5 ;
+
+        @Override
+        public boolean isAllowed(Arc arc) {
+            return true;
+        }
+
+        @Override
+        public double getCost(Arc arc) {
+            return arc.getLength() ;
+        }
+
+        /*
+        @Override
+        public int getMaximumSpeed() {
+            return GraphStatistics.NO_MAXIMUM_SPEED;
+        }
+        */
+
+        @Override
+        public Mode getMode() {
+            return Mode.LENGTH ;
+        }
+
+        @Override
+        public String toString() {
+            return "Shortest path, bicycle roads allowed";
+        }
+
+
+    };
+
+
     /**
      * @return List of all arc filters in this factory.
      */
@@ -156,6 +191,7 @@ public class ArcInspectorFactory {
         filters.add(forCarsL) ;
         filters.add(forCarsT) ;
         filters.add(forBicyclesT);
+        filters.add(forBicyclesL);
 
         // Add your own filters here (do not forget to implement toString()
         // to get an understandable output!):

@@ -21,7 +21,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin simple");
             origine = 4965;
             destination = 4943;
-            test.testScenario(mapName, 1, origine, destination, false);
+            test.testScenario(mapName, 1, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -30,7 +30,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin impossible");
             origine = 4965;
             destination = 183889;
-            test.testScenario(mapName, 1, origine, destination, false);
+            test.testScenario(mapName, 1, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -39,7 +39,7 @@ public class AstarTest {
             System.out.println("Cas origine = Destination");
             origine = 4965;
             destination = 4965;
-            test.testScenario(mapName, 1, origine, destination, false);
+            test.testScenario(mapName, 1, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -48,7 +48,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin très long");
             origine = 60478;
             destination = 35535;
-            test.testScenario(mapName, 1, origine, destination, false);
+            test.testScenario(mapName, 1, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -57,7 +57,7 @@ public class AstarTest {
             System.out.println("Cas d'un points inexistants");
             origine = -1;
             destination = -2;
-            test.testScenario(mapName, 1, origine, destination, false);
+            test.testScenario(mapName, 1, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -81,7 +81,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin simple");
             origine = 4965;
             destination = 4943;
-            test.testScenario(mapName, 0, origine, destination, false);
+            test.testScenario(mapName, 0, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -90,7 +90,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin impossible");
             origine = 4965;
             destination = 183889;
-            test.testScenario(mapName, 0, origine, destination, false);
+            test.testScenario(mapName, 0, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -99,7 +99,7 @@ public class AstarTest {
             System.out.println("Cas origine = Destination");
             origine = 4965;
             destination = 4965;
-            test.testScenario(mapName, 0, origine, destination, false);
+            test.testScenario(mapName, 0, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -108,7 +108,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin très long");
             origine = 60478;
             destination = 35535;
-            test.testScenario(mapName, 0, origine, destination, false);
+            test.testScenario(mapName, 0, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -117,7 +117,7 @@ public class AstarTest {
             System.out.println("Cas d'un points inexistants");
             origine = -1;
             destination = -2;
-            test.testScenario(mapName, 0, origine, destination, false);
+            test.testScenario(mapName, 0, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -140,7 +140,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin simple");
             origine = 287;
             destination = 282;
-            test.testScenario(mapName, 1, origine, destination, false);
+            test.testScenario(mapName, 1, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -149,7 +149,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin impossible");
             origine = 1283;
             destination = 735;
-            test.testScenario(mapName, 1, origine, destination, false);
+            test.testScenario(mapName, 1, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -158,7 +158,7 @@ public class AstarTest {
             System.out.println("Cas origine = Destination");
             origine = 396;
             destination = 396;
-            test.testScenario(mapName, 1, origine, destination, false);
+            test.testScenario(mapName, 1, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -167,7 +167,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin très long");
             origine = 107;
             destination = 60;
-            test.testScenario(mapName, 1, origine, destination, false);
+            test.testScenario(mapName, 1, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -176,7 +176,7 @@ public class AstarTest {
             System.out.println("Cas d'un points inexistants");
             origine = -1;
             destination = -2;
-            test.testScenario(mapName, 1, origine, destination, false);
+            test.testScenario(mapName, 1, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -200,7 +200,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin simple");
             origine = 287;
             destination = 282;
-            test.testScenario(mapName, 0, origine, destination, false);
+            test.testScenario(mapName, 0, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -209,7 +209,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin impossible");
             origine = 1283;
             destination = 735;
-            test.testScenario(mapName, 0, origine, destination, false);
+            test.testScenario(mapName, 0, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -218,7 +218,7 @@ public class AstarTest {
             System.out.println("Cas origine = Destination");
             origine = 396;
             destination = 396;
-            test.testScenario(mapName, 0, origine, destination, false);
+            test.testScenario(mapName, 0, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -227,7 +227,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin très long");
             origine = 107;
             destination = 60;
-            test.testScenario(mapName, 0, origine, destination, false);
+            test.testScenario(mapName, 0, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -236,7 +236,7 @@ public class AstarTest {
             System.out.println("Cas d'un points inexistants");
             origine = -1;
             destination = -2;
-            test.testScenario(mapName, 0, origine, destination, false);
+            test.testScenario(mapName, 0, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -259,7 +259,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin long");
             origine = 244253;
             destination = 85284;
-            test.testScenario(mapName, 1, origine, destination, false);
+            test.testScenario(mapName, 1, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -268,7 +268,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin simple");
             origine = 200457;
             destination = 17462;
-            test.testScenario(mapName, 1, origine, destination, false);
+            test.testScenario(mapName, 1, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -277,7 +277,7 @@ public class AstarTest {
             System.out.println("Cas origine = Destination");
             origine = 17462;
             destination = 17462;
-            test.testScenario(mapName, 1, origine, destination, false);
+            test.testScenario(mapName, 1, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -286,7 +286,7 @@ public class AstarTest {
             System.out.println("Cas d'un points inexistants");
             origine = -1;
             destination = -2;
-            test.testScenario(mapName, 1, origine, destination, false);
+            test.testScenario(mapName, 1, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -309,7 +309,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin long");
             origine = 244253;
             destination = 85284;
-            test.testScenario(mapName, 0, origine, destination, false);
+            test.testScenario(mapName, 0, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -318,7 +318,7 @@ public class AstarTest {
             System.out.println("Cas d'un chemin simple");
             origine = 200457;
             destination = 17462;
-            test.testScenario(mapName, 0, origine, destination, false);
+            test.testScenario(mapName, 0, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -327,7 +327,7 @@ public class AstarTest {
             System.out.println("Cas origine = Destination");
             origine = 17462;
             destination = 17462;
-            test.testScenario(mapName, 0, origine, destination, false);
+            test.testScenario(mapName, 0, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
@@ -336,7 +336,7 @@ public class AstarTest {
             System.out.println("Cas d'un points inexistants");
             origine = -1;
             destination = -2;
-            test.testScenario(mapName, 0, origine, destination, false);
+            test.testScenario(mapName, 0, origine, destination, false,0);
         } catch (Exception e) {
             System.err.println("Erreur lors de l'appel à testScenario");
         }
