@@ -166,7 +166,7 @@ public class AlgoTest {
                         arcInspectorDijkstra);
 
                 if (Dijkstra) {
-                    D = new AStarAlgorithm(data);
+                    D = new DijkstraAlgorithm(data);
                     Obtenu = D.run();
                 } else {
                     A = new AStarAlgorithm(data);
@@ -195,7 +195,7 @@ public class AlgoTest {
                 data = new ShortestPathData(graph, graph.get(origine), graph.get(destination), arcInspectorDijkstra);
 
                 if (Dijkstra) {
-                    D = new AStarAlgorithm(data);
+                    D = new DijkstraAlgorithm(data);
                     Obtenu = D.run();
                 } else {
                     A = new AStarAlgorithm(data);
